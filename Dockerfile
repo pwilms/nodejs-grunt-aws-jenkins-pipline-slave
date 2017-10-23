@@ -10,5 +10,15 @@ RUN apt-get -yq update && \
 RUN gem update --system && \
     gem install compass && \
     pip3 install awscli
+    
+    # Installing Docker
+RUN wget https://get.docker.com/builds/Linux/x86_64/docker-1.11.0.tgz -O docker.tgz   && \
+    tar -xvzf docker.tgz   && \
+    mv docker/* /usr/bin/  && \
+    chmod +x /usr/bin/docker && \
+
+# Installs Docker Compose
+RUN curl --fail --silent -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/bin/docker-compose  && \
+   chmod +x /usr/bin/docker-compose  
 
 RUN useradd -ms /bin/bash jenkins
